@@ -46,7 +46,7 @@ VERILATOR_DIR     = $(FUSESOC_BUILD_DIR)/sim-verilator
 QUESTASIM_DIR     = $(FUSESOC_BUILD_DIR)/sim-modelsim
 
 # Project options are based on the app to be built (default - hello_world)
-PROJECT  ?= hello_world
+PROJECT  ?= sensor_node_firmware
 
 # Folder where the linker scripts are located
 LINK_FOLDER ?= $(mkfile_path)/sw/linker
@@ -191,7 +191,7 @@ format-python:
 	$(PYTHON) -m black util/c_gen.py
 	$(PYTHON) -m black test/test_x_heep_gen
 
-## @section APP FW Build
+# @section APP FW Build
 
 ## Generates the build folder in sw using CMake to build (compile and linking)
 ## @param PROJECT=<folder_name_of_the_project_to_be_built>
