@@ -1,15 +1,9 @@
-STEP 1 RUN DOCKER CONTAINER
-docker run -it --rm -v C:\Users\chiam\Desktop\x-heep-main\x-heep-main:/workspace/x-heep ghcr.io/x-heep/x-heep/x-heep-toolchain:latest /bin/bash
+STEP 1 OPEN FOLDER IN WSL
+STEP 2 SET UP DOCKER 
 
-STEP 2 INIT & ACTIVATE CONDA
-apt update
-source /opt/conda/etc/profile.d/conda.sh
-conda activate core-v-mini-mcu
+make -C util/docker docker-pull TAG=latest
+make -C util/docker docker-run TAG=latest
 
-download verible, follow instructions on site
-
-STEP 3 MAKE MCU
-make mcu-gen
-
-STEP 4 COMPILE HELLO WORLD
-make app
+STEP 3 HELLO WORLD
+init_gcc
+make app PROJECT=hello_world
