@@ -48,6 +48,7 @@ package core_v_mini_mcu_pkg;
   localparam logic [31:0] DMA_READ_P0_IDX = 3;
   localparam logic [31:0] DMA_WRITE_P0_IDX = 4;
   localparam logic [31:0] DMA_ADDR_P0_IDX = 5;
+  //localparam logic [31:0] FIR_ACCELERATOR_IDX = 6; 
  
   localparam SYSTEM_XBAR_NMASTER = ${3 + int(dma.get_num_master_ports())*3};
 

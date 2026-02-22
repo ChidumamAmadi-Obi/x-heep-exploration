@@ -1,0 +1,39 @@
+CAPI=2:
+
+name: "x-heep:ip:fir_accelerator"
+description: "Custom Finite Impulse Response (FIR) accelerator peripheral"
+
+filesets:
+    files_rtl:
+        depend:
+            - x-heep::packages
+            - pulp-platform.org::common_cells
+            - pulp-platform.org::register_interface
+        files: 
+        - rtl/fir_accelerator_reg_pkg.sv
+        - rtl/fir_accelerator_reg_top.sv
+        - rtl/shiftReg.sv
+        - rtl/mac.sv
+        - rtl/top.sv
+        - rtl/fir_accelerator.sv
+        file_type: systemVerilogSource
+
+    headers:
+        files:
+        - rtl/constants.svh: { is_include_file: true }
+        file_type: systemVerilogSource
+    
+    files_waiver:
+        depend:
+        - openhwgroup.org:ip:verilator_waiver
+        files:
+        - fir_accelerator.vlt
+        file_type: tclSource
+        
+targets:
+    default:
+        filesets:
+        - files_waiver
+        - files_rtl
+        - headers
+        

@@ -262,7 +262,6 @@ if(${PROJECT} MATCHES "freertos")
   SET(LIB_VCTR_P	"${SOURCE_PATH}device/lib/crt/vectors_freertos.S")
 endif()
 
-
 #######################################################################
 #      SET CRT AND LINKER TYPE
 #######################################################################
@@ -413,6 +412,7 @@ add_executable(${MAINFILE}.elf
   ${CRT_FILES}
   ${c_dir_list}
 )
+target_link_options(${MAINFILE}.elf PRIVATE "-Wl,-u,_printf_float")
 
 # add include directories to compilation
 target_include_directories(${MAINFILE}.elf PUBLIC ${h_dir_list_})

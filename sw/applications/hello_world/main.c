@@ -19,9 +19,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     /* write something to stdout */
-    printf("hello world!\n");
+    printf("\x1b[1;32m hello world! \x1b[0m\n");
     return EXIT_SUCCESS;
 }

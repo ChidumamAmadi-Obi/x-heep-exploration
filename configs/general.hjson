@@ -3,7 +3,7 @@
     ram_banks: {
         code_and_data: {
             num: 2
-            sizes: [32]
+            sizes: [128]
         }
     }
 
@@ -13,11 +13,12 @@
             name: code
             start: 0
             #minimum size for freeRTOS and clang
-            size: 0x00000E800
+            size: 0x00010000
         }
         {
             name: data
-            start: 0x00000E800
+            start: 0x00010000
+            size: 0x00010000
         }
     ]
 
@@ -27,7 +28,7 @@
     // Derived from Occamy: https://github.com/pulp-platform/snitch/blob/master/hw/system/occamy/src/occamy_cfg.hjson
     // Peripherals configuration for core-v-mini-mcu.
 
-    cpu_type: cv32e20
+    cpu_type: cv32e40x
 
     linker_script: {
         stack_size: 0x800
@@ -150,6 +151,11 @@
         }
         uart: {
             offset:  0x00080000
+            length:  0x00010000
+            is_included: "yes"
+        }
+        fir_accelerator: {
+            offset:  0x00090000
             length:  0x00010000
             is_included: "yes"
         }

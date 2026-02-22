@@ -46,7 +46,7 @@ VERILATOR_DIR     = $(FUSESOC_BUILD_DIR)/sim-verilator
 QUESTASIM_DIR     = $(FUSESOC_BUILD_DIR)/sim-modelsim
 
 # Project options are based on the app to be built (default - hello_world)
-PROJECT  ?= sensor_node_firmware
+PROJECT  ?= hello_world
 
 # Folder where the linker scripts are located
 LINK_FOLDER ?= $(mkfile_path)/sw/linker
@@ -104,7 +104,7 @@ COMPILER 		?= gcc
 # Compiler prefix options are 'riscv32-corev-' (default) and 'riscv32-unknown-'
 COMPILER_PREFIX ?= $(shell basename $$(ls $(RISCV_XHEEP)/bin/*gcc 2>/dev/null | head -1) | sed 's/elf-gcc$$//')
 # Compiler flags to be passed (for both linking and compiling)
-COMPILER_FLAGS 	?=
+COMPILER_FLAGS 	?= 
 # Arch options are any RISC-V ISA string supported by the CPU. Default 'rv32imc_zicsr'
 ARCH     		?= rv32imc_zicsr
 # Tell clang to use the gcc link instead of the llvm linker (useful for old clang). Default '0' (set it to 1)
@@ -166,6 +166,7 @@ conda:
 mcu-gen:
 	$(PYTHON) util/mcu_gen.py --cached_path $(XHEEP_CONFIG_CACHE) --config $(X_HEEP_CFG) --python_config $(PYTHON_X_HEEP_CFG) --pads_cfg $(PADS_CFG) --cpu $(CPU) --bus $(BUS) --memorybanks $(MEMORY_BANKS) --memorybanks_il $(MEMORY_BANKS_IL) --external_domains $(EXTERNAL_DOMAINS)
 	$(PYTHON) util/mcu_gen.py --cached_path $(XHEEP_CONFIG_CACHE) --cached --outtpl "$(subst $(space),$(comma),$(MCU_GEN_TEMPLATES))"
+	bash -c "cd hw/ip/fir_accelerator; source fir_accelerator_gen.sh; cd ../../../"
 	bash -c "cd hw/ip/soc_ctrl; source soc_ctrl_gen.sh; cd ../../../"
 	bash -c "cd hw/ip/power_manager; source power_manager_gen.sh; cd ../../../"
 	bash -c "cd hw/ip/pdm2pcm; source pdm2pcm_gen.sh; cd ../../../"

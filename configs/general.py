@@ -30,6 +30,7 @@ from x_heep_gen.peripherals.user_peripherals import (
     PDM2PCM,
     I2S,
     UART,
+    FIR_accelerator,
 )
 
 
@@ -67,9 +68,8 @@ def config():
     user_peripheral_domain.add_peripheral(RV_timer(0x00040000))
     user_peripheral_domain.add_peripheral(SPI2(0x00050000))
     user_peripheral_domain.add_peripheral(UART(0x00080000))
-    user_peripheral_domain.add_peripheral(
-        I2S()
-    )  # If no address is provided, the peripheral will be automatically added where there is space.
+    user_peripheral_domain.add_peripheral(I2S())  # If no address is provided, the peripheral will be automatically added where there is space.
+    user_peripheral_domain.add_peripheral(FIR_accelerator(0x00090000))
 
     # Add the peripheral domains to the system
     system.add_peripheral_domain(base_peripheral_domain)

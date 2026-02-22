@@ -481,6 +481,14 @@ module peripheral_subsystem
   assign rv_timer_3_intr_o = '0;
 % endif
 
+fir_accelerator fir_accelerator_i (
+    .clk_i(clk_cg),
+    .rst_ni,
+    
+    .reg_req_i(peripheral_slv_req[core_v_mini_mcu_pkg::FIR_ACCELERATOR_IDX]),
+    .reg_rsp_o(peripheral_slv_rsp[core_v_mini_mcu_pkg::FIR_ACCELERATOR_IDX])
+);
+
 % if user_peripheral_domain.contains_peripheral('spi2'):
   spi_host #(
       .reg_req_t(reg_pkg::reg_req_t),

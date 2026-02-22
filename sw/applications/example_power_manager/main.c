@@ -27,8 +27,8 @@
 #define EXTERNAL_CSR_REG_MIE_MASK (1<<11)
 
 /* By default, printfs are activated for FPGA and disabled for simulation. */
-#define PRINTF_IN_FPGA  1
-#define PRINTF_IN_SIM   0
+#define PRINTF_IN_FPGA  0
+#define PRINTF_IN_SIM   1
 
 #if TARGET_SIM && PRINTF_IN_SIM
         #define PRINTF(fmt, ...)    printf(fmt, ## __VA_ARGS__)

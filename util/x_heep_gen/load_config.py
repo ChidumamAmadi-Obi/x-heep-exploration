@@ -38,6 +38,7 @@ from .peripherals.user_peripherals import (
     PDM2PCM,
     I2S,
     UART,
+    FIR_accelerator,
 )
 
 
@@ -403,6 +404,8 @@ def load_peripherals_config(system: XHeep, config_path: str):
                         peripheral = I2S(offset, length)
                     elif peripheral_name == "uart":
                         peripheral = UART(offset, length)
+                    elif peripheral_name == "fir_accelerator":
+                        peripheral = FIR_accelerator(offset, length)
                     else:
                         raise ValueError(
                             f"Peripheral {peripheral_name} does not exist."
