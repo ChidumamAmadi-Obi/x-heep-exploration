@@ -12,7 +12,7 @@
 FIRAcceleratorStatus errorCode;
 
 int sensorValues(uint32_t max){ // emulate incoming sensor values by generating random numbers
-    return (rand() % (max + 1)); // gen random values between max and 0
+    return (rand() % (max + 1)); // return gen random values between max and 0
 }
 
 int main(int argc, char *argv[]){
@@ -20,8 +20,8 @@ int main(int argc, char *argv[]){
     float coefficients[8] = {0.1, 0.2, 0.3, 0.4, 0.3, 0.2, 0.1, 0.05};
     float filteredSensorValue=0;
 
-    printf("\e[0;36m===================================\e[0m\n"); 
-    printf("  FIR ACCELERATOR EXAMPLE PROGRAM\n");
+    printf("\e[0;36m===================================\e[0m\n"); // use ansi escape codes to print in color so i can see
+    printf("  \e[1;37mFIR ACCELERATOR EXAMPLE PROGRAM\e[0m\n");
     printf("\e[0;36m===================================\e[0m\n"); 
     printf("  FIR_ACC_PERIPH BASE: \e[1;37m0x%08x\e[0m\n", (unsigned int)FIR_ACC_PERIPH); // check to see if accelerator is present
     printf("\e[0;36m===================================\e[0m\n"); 

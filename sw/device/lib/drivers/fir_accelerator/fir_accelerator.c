@@ -41,7 +41,7 @@ void firRst(){ //  reset accelerator
 }
 void firSendData(float dataIn){ // convert data in to fixed point and input into accelerator
     FIR_ACC_PERIPH->DATAI = FL2FP(dataIn);
-    firShift(); // shift data only when new ones arrive
+    firShift(); // shift data only when new values arrive
     wait(WAIT_CYCLES);
 }
 
@@ -58,7 +58,7 @@ FIRAcceleratorStatus firInit(){ // initiallize accelerator
         wait(WAIT_CYCLES);
         countTimer++;
         /*
-        wait until valid bit is set
+        wait until valid bit is set (valid bit tells us the accelerator is up and running normally, i need to change the name to a more suitable one)
         if timeout return error
         */
     }

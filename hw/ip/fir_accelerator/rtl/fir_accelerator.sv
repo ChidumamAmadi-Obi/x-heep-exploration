@@ -16,7 +16,6 @@ module fir_accelerator (
   import reg_pkg::*;
   import fir_accelerator_reg_pkg::*;
 
-
   fir_accelerator_reg2hw_t reg2hw;  // CPU -> accelerator
   fir_accelerator_hw2reg_t hw2reg;  // accelerator -> CPU
 
