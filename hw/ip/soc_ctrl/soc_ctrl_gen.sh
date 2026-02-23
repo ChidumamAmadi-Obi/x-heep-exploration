@@ -35,4 +35,3 @@ python $PERIPH_STRUCTS_GEN --template_filename $TEMPLATE_FILE \
 printf -- "Generating $PERIPHERAL_NAME documentation..."
 $REGTOOL -d $HJSON_FILE > ${SW_DIR}/${PERIPHERAL_NAME}_regs.md
 [ $? -eq 0 ] && printf " OK\n" || exit $?
-
