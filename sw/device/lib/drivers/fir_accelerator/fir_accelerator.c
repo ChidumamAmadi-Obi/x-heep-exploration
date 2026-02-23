@@ -22,13 +22,18 @@ void firCClear(){ // clear coefficient register
     wait(WAIT_CYCLES);
     FIR_ACC_PERIPH->CTRL &= ~( 1 << FIR_ACCELERATOR_CONTROL_CLR_C_BIT );
 }
+void firShift(){ // shift data register once
+    FIR_ACC_PERIPH->CTRL |= ( 1 << FIR_ACCELERATOR_CONTROL_SHIFT_BIT );
+    wait(WAIT_CYCLES);
+    FIR_ACC_PERIPH->CTRL &= ~( 1 << FIR_ACCELERATOR_CONTROL_SHIFT_BIT );
+}
 void firRClear(){ // clear writeable registers
     FIR_ACC_PERIPH->CDATA=0;
     FIR_ACC_PERIPH->CADDR=0;
 }
 void firRst(){ //  reset accelerator
     firEnable(false);
-    wait(255);
+    wait(WAIT_CYCLES);
     firEnable(true);
 
     firCClear(); // clear everything
@@ -36,6 +41,8 @@ void firRst(){ //  reset accelerator
 }
 void firSendData(float dataIn){ // convert data in to fixed point and input into accelerator
     FIR_ACC_PERIPH->DATAI = FL2FP(dataIn);
+    firShift(); // shift data only when new ones arrive
+    wait(WAIT_CYCLES);
 }
 
 
@@ -58,8 +65,7 @@ FIRAcceleratorStatus firInit(){ // initiallize accelerator
     return NONE; // end with no errors
 }
 FIRAcceleratorStatus firLoadCoefficient(uint8_t coeffAddr, float coeffIn){ // load coefficient into coefficient register file
-    // check if invalid address
-    if (coeffAddr < C_0 || coeffAddr > C_7) return OUT_OF_BOUNDS;
+    if (coeffAddr < C_0 || coeffAddr > C_7) return OUT_OF_BOUNDS; // check if invalid address
 
     firCWEnable(true);
 
@@ -71,13 +77,16 @@ FIRAcceleratorStatus firLoadCoefficient(uint8_t coeffAddr, float coeffIn){ // lo
     return NONE; // no errors
 }
 FIRAcceleratorStatus firLoadCoefficientBatch(float coeffsIn[NUM_COEFF_REGS]) { // write to all coeff registers at once
+    if ((sizeof(coeffsIn) / sizeof(float)) == NUM_COEFF_REGS){ // check if array has correct number of coefficients
+        return INVALID_NUM_COEFFS;
+    }
+    
     firCClear();
     firCWEnable(true);
 
     for (uint32_t i=0; i<NUM_COEFF_REGS; i++) { // iterrate through all coeff addresses
         FIR_ACC_PERIPH->CADDR = i;
-        FIR_ACC_PERIPH->CDATA = FL2FP(coeffsIn[i]) ; // convert input to fl=ixed point before sending
-        wait(200);
+        FIR_ACC_PERIPH->CDATA = FL2FP(coeffsIn[i]) ; // convert input to fixed point before sending
     }
 
     firCWEnable(false);

@@ -8,6 +8,7 @@ module top (
     input logic clk,
     input logic rstN,  // active low reset
     input logic clrC,  // clear coeffs in register file
+    input logic shift,  // tells shift register to shift once
     input logic accelerateEn,  // to enable accelerator
     input logic coeffWriteEn,  // write enable sig for coeffs
     input logic [2:0] coeffAddress,  // 3 bit address for coeffs
@@ -46,7 +47,7 @@ module top (
   end
 
   shiftReg shiftRegInstance (
-      .clk(clk),
+      .shift(shift),
       .rst(!rstN),  // convert reset sig to active high
       .sDataIn(rawSensorVal),
       .pDataOut(pDataIntoMac)

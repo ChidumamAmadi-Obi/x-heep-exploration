@@ -78,6 +78,9 @@ module fir_accelerator_reg_top #(
   logic control_clr_c_wd;
   logic control_clr_c_we;
   logic control_busy_qs;
+  logic control_shift_qs;
+  logic control_shift_wd;
+  logic control_shift_we;
   logic [2:0] coeff_addr_qs;
   logic [2:0] coeff_addr_wd;
   logic coeff_addr_we;
@@ -193,6 +196,32 @@ module fir_accelerator_reg_top #(
 
       // to register interface (read)
       .qs(control_busy_qs)
+  );
+
+
+  //   F[shift]: 4:4
+  prim_subreg #(
+      .DW      (1),
+      .SWACCESS("RW"),
+      .RESVAL  (1'h0)
+  ) u_control_shift (
+      .clk_i (clk_i),
+      .rst_ni(rst_ni),
+
+      // from register interface
+      .we(control_shift_we),
+      .wd(control_shift_wd),
+
+      // from internal hardware
+      .de(1'b0),
+      .d ('0),
+
+      // to internal hardware
+      .qe(),
+      .q (reg2hw.control.shift.q),
+
+      // to register interface (read)
+      .qs(control_shift_qs)
   );
 
 
@@ -364,6 +393,9 @@ module fir_accelerator_reg_top #(
   assign control_clr_c_we = addr_hit[0] & reg_we & !reg_error;
   assign control_clr_c_wd = reg_wdata[2];
 
+  assign control_shift_we = addr_hit[0] & reg_we & !reg_error;
+  assign control_shift_wd = reg_wdata[4];
+
   assign coeff_addr_we = addr_hit[1] & reg_we & !reg_error;
   assign coeff_addr_wd = reg_wdata[2:0];
 
@@ -382,6 +414,7 @@ module fir_accelerator_reg_top #(
         reg_rdata_next[1] = control_coeff_write_en_qs;
         reg_rdata_next[2] = control_clr_c_qs;
         reg_rdata_next[3] = control_busy_qs;
+        reg_rdata_next[4] = control_shift_qs;
       end
 
       addr_hit[1]: begin

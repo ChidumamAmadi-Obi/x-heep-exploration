@@ -49,6 +49,13 @@
           swaccess: "ro",
           hwaccess: "hwo",
           resval: 0 
+        },{
+          bits: "4",
+          name: "shift",
+          desc: "signals shift register to shift once",
+          swaccess: "rw",
+          hwaccess: "hro",
+          resval: 0
         }
       ]
     },{

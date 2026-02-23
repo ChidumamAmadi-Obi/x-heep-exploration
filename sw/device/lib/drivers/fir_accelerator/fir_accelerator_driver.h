@@ -16,6 +16,7 @@ typedef struct{ // saccess all registers in accelerator from peripheral struct
     bit 1 = coeff write enable
     bit 2 = clear coeffs
     bit 3 = busy
+    bit 4 = shift
     */    
 
     volatile uint32_t CADDR; // input coefficient address to write to 
@@ -32,6 +33,7 @@ typedef enum{ // keep track of accelerator error codes
     NONE,           // no errors occured
     TIME_OUT,
     OUT_OF_BOUNDS,  // user is trying to access something that does not exist/ outof bounds
+    INVALID_NUM_COEFFS,
     INVALID         // invalid 
 } FIRAcceleratorStatus;
 typedef enum{ // error codes when reading registers
@@ -66,7 +68,7 @@ convertions need to be made before reading & writing to the peripheral
 
 // configure delay macros ( will be replaced with proper timer implimentation later)
 #define SLEEP_ASM asm volatile("nop");
-#define WAIT_CYCLES 255
+#define WAIT_CYCLES 10 
 #define TIMEOUT_COUNT 100
 
 // DECLARATIONS ********************************************************************************************
@@ -76,6 +78,7 @@ void firEnable(bool en);
 void firCWEnable(bool en); // coefficient write enable
 void firCClear(); // clear coefficient register file
 void firRClear(); // clear writeable registers
+void firShift():
 void firRst();
 void firSendData(float dataIn); // send data to be filtered
 

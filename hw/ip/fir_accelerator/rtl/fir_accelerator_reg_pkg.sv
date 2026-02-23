@@ -17,6 +17,7 @@ package fir_accelerator_reg_pkg;
     struct packed {logic q;} accelerate_en;
     struct packed {logic q;} coeff_write_en;
     struct packed {logic q;} clr_c;
+    struct packed {logic q;} shift;
   } fir_accelerator_reg2hw_control_reg_t;
 
   typedef struct packed {logic [2:0] q;} fir_accelerator_reg2hw_coeff_addr_reg_t;
@@ -46,7 +47,7 @@ package fir_accelerator_reg_pkg;
 
   // Register -> HW type
   typedef struct packed {
-    fir_accelerator_reg2hw_control_reg_t control;  // [101:99]
+    fir_accelerator_reg2hw_control_reg_t control;  // [102:99]
     fir_accelerator_reg2hw_coeff_addr_reg_t coeff_addr;  // [98:96]
     fir_accelerator_reg2hw_coeff_data_reg_t coeff_data;  // [95:64]
     fir_accelerator_reg2hw_sensor_data_reg_t sensor_data;  // [63:32]
