@@ -415,7 +415,7 @@ add_executable(${MAINFILE}.elf
 target_link_options(${MAINFILE}.elf PRIVATE "-Wl,-u,_printf_float")
 
 # add include directories to compilation
-target_include_directories(${MAINFILE}.elf PUBLIC ${h_dir_list_})
+target_include_directories(${MAINFILE}.elf PUBLIC ${h_dir_list_}) # enable printinf of floating points
 
 # linking the libraries
 #target_link_libraries(${MAINFILE}.elf base)

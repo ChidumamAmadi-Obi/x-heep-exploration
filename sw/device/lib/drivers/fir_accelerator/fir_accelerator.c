@@ -75,10 +75,9 @@ FIRAcceleratorStatus firLoadCoefficientBatch(float coeffsIn[NUM_COEFF_REGS]) { /
     firCWEnable(true);
 
     for (uint32_t i=0; i<NUM_COEFF_REGS; i++) { // iterrate through all coeff addresses
-        
         FIR_ACC_PERIPH->CADDR = i;
         FIR_ACC_PERIPH->CDATA = FL2FP(coeffsIn[i]) ; // convert input to fl=ixed point before sending
-        
+        wait(200);
     }
 
     firCWEnable(false);
