@@ -7,7 +7,7 @@
 #include "core_v_mini_mcu.h"
 #include "fir_accelerator_driver.h" 
 
-#define NUM_SENSOR_VALUES 30 // number of values to be filtered by fir accelerator (needs to be > 8)
+#define NUM_SENSOR_VALUES 50 // number of values to be filtered by fir accelerator (needs to be > 8)
 
 FIRAcceleratorStatus errorCode;
 
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]){
 
     printf("  NO.   RAW   FILTERED\n\n");
     for (int i=0; i<=NUM_SENSOR_VALUES; i++) {
-        incomingSensorValue=sensorValues(10);
+        incomingSensorValue=sensorValues(-10);
         firSendData((float)incomingSensorValue);
         wait(WAIT_CYCLES);
         errorCode=firReadResult(&filteredSensorValue); // get result and store in filteredSensorValue

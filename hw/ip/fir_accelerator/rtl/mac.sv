@@ -21,15 +21,17 @@ module mac (
   always_comb begin
     accumulator = 0;
     accumulatorScaled = 0;
-    for ( integer i = 0; i < NUM_REGS; i++ ) begin  // fixed-point multiplication because result has 2*Q_FORMAT fractional bits
+    for (
+        integer i = 0; i < NUM_REGS; i++
+    ) begin  // fixed-point multiplication because result has 2*Q_FORMAT fractional bits
       accumulator += (coefs[i]) * (pDataIn[i]);
     end
 
     // then scale back to Q_FORMAT fractional bits
     // Add rounding ,2^(Q_FORMAT-1) before truncation
-    if (accumulator >= 0) begin // if positive...
+    if (accumulator >= 0) begin  // if positive...
       accumulatorScaled = accumulator + (1 << (Q_FORMAT - 1));
-    end else begin // if negative...
+    end else begin  // if negative...
       accumulatorScaled = accumulator - (1 << (Q_FORMAT - 1));
     end
 

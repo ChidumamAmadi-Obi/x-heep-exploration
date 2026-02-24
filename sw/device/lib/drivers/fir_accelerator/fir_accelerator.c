@@ -49,7 +49,8 @@ void firSendData(float dataIn){ // convert data in to fixed point and input into
 FIRAcceleratorStatus firInit(){ // initiallize accelerator
     firEnable(true); 
     firCWEnable(false);
-    firCClear();
+
+    firCClear(); // clear everything
     firRClear();
 
     uint8_t countTimer=0;

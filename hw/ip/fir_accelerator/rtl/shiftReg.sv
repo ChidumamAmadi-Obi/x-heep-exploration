@@ -6,7 +6,7 @@ shift register, then paralell out all elements in shift register
 `include "constants.svh"
 
 module shiftReg (
-    input logic shift, // tell shift reg to shift once
+    input logic shift,  // tell shift reg to shift once
     input logic rst,
     input logic [FIR_DATA_WIDTH-1:0] sDataIn,  // serial data in
     output logic [FIR_DATA_WIDTH-1:0] pDataOut[0:NUM_REGS-1]  // parallel data out
@@ -29,7 +29,7 @@ module shiftReg (
 
   always_comb begin  // combinational output
     for (integer i = 0; i < NUM_REGS; i++) begin
-      pDataOut[i] = sReg[i]; // output data in paralel
+      pDataOut[i] = sReg[i];  // output data in paralel
     end
   end
 endmodule
