@@ -40,9 +40,7 @@ int main(int argc, char *argv[]){
     for (int i=0; i<=NUM_SENSOR_VALUES; i++) {
         incomingSensorValue=sensorValues(10);
         firSendData((float)incomingSensorValue);
-        wait(WAIT_CYCLES);
         errorCode=firReadResult(&filteredSensorValue); // get result and store in filteredSensorValue
-        wait(WAIT_CYCLES);
 
         if (errorCode != NONE) {
             printf("\n\e[0;31m ERROR, NULL POINTER \e[0m\n");
