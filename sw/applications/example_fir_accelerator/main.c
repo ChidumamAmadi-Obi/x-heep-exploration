@@ -46,6 +46,7 @@ int main(int argc, char *argv[]){
             printf("\n\e[0;31m ERROR, NULL POINTER \e[0m\n");
             return -1;
         }
+        
         if (i < 8) printf("  %d  ->  %d   %f\n", i, incomingSensorValue, filteredSensorValue); // visualize how the first 8 results should be discarded
         else printf("  %d  ->  \e[0;36m%d\e[0m   \e[1;36m%f\e[0m\n", i, incomingSensorValue, filteredSensorValue);
     }

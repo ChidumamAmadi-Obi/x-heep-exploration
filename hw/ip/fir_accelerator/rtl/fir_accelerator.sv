@@ -43,9 +43,9 @@ module fir_accelerator (
       .shift        (reg2hw.control.shift.q),
       .accelerateEn (reg2hw.control.accelerate_en.q),
       .coeffWriteEn (reg2hw.control.coeff_write_en.q),
-      .coeffAddress (reg2hw.coeff_addr.q),              // Now should be .q not .addr.q
-      .rawSensorVal (reg2hw.sensor_data.q),             // Now should be .q not .sensor.q  
-      .coeffIn      (reg2hw.coeff_data.q),              // Now should be .q not .coeff.q
+      .coeffAddress (reg2hw.coeff_addr.q),
+      .rawSensorVal (reg2hw.sensor_data.q),
+      .coeffIn      (reg2hw.coeff_data.q),
       .macResult    (mac_result_wire),
       .resultIsValid(result_valid_wire),
       .busy         (busy_wire)

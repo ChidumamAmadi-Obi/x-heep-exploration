@@ -10,7 +10,7 @@ module mac (
     input logic signed [FIR_DATA_WIDTH-1:0] coefs[0:NUM_REGS-1],
     output logic signed [FIR_DATA_WIDTH-1:0] macResult
 );
-
+  // calculate the minimum bit-wdth needed for accumulator so it doesnt overflow
   localparam MAC_ACC_WIDTH = 2 * FIR_DATA_WIDTH + $clog2(
       NUM_REGS
   );  // ref https://circuitcove.com/system-tasks-clog2/
